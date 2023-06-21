@@ -1,0 +1,2 @@
+The directory server is run by the command:
+docker run --net=bridge dirserverimage

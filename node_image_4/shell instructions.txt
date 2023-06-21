@@ -1,0 +1,7 @@
+main.py constains a script to close it via terminal when pressing a key.
+In order to prevent the docker from closing and alloweing interaction,
+run: docker run -it --rm nodeimage
+"-it" is "interactive" - allows shell input
+"--rm" removes the container after exit. This is crucial:
+Containers without --rm flag will be connected to the network even when they aren't active.
+Keeping the docker running is required to check for running container's ips by the directory server.

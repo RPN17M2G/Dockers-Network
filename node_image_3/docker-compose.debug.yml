@@ -1,0 +1,24 @@
+version: '3.4'
+
+networks:
+  DockersNetwork:
+    external: true
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+services:
+  nodeimage:
+    image: nodeimage3
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./node:/code/node
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 -m uvicorn node.main:app --host 0.0.0.0 --port 8000 --reload"]
+    networks:
+      DockersNetwork:
+        ipv4_address: 172.20.0.3
+    ports:
+    - 8000:8000
+    - 5678:5678

@@ -1,0 +1,56 @@
+version: '3.4'
+
+networks:
+  DockersNetwork:
+    external: true
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+services:
+  dirserverimage:
+    image: galilmaaravi-606-tor-dirserverimage-1
+    build:
+      context: .
+      dockerfile: /dir_server_image/Dockerfile
+    networks:
+      DockersNetwork:
+        ipv4_address: 172.20.0.8
+
+  nodeimage:
+    image: galilmaaravi-606-tor-nodeimage-1
+    build:
+      context: .
+      dockerfile: /node_image/Dockerfile
+    networks:        
+      DockersNetwork:
+        ipv4_address: 172.20.0.7
+  
+  nodeimage2:
+    image: galilmaaravi-606-tor-nodeimage-2
+    build:
+      context: .
+      dockerfile: /node_image_2/Dockerfile
+    networks:        
+      DockersNetwork:
+        ipv4_address: 172.20.0.9
+      
+    nodeimage3:
+      image: galilmaaravi-606-tor-nodeimage-3
+      build:
+        context: .
+        dockerfile: /node_image_3/Dockerfile
+      networks:        
+        DockersNetwork:
+          ipv4_address: 172.20.0.10
+
+    nodeimage4:
+      image: galilmaaravi-606-tor-nodeimage-4
+      build:
+        context: .
+        dockerfile: /node_image_4/Dockerfile
+      networks:        
+        DockersNetwork:
+          ipv4_address: 172.20.0.11
+
+

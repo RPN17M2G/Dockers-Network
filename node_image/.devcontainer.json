@@ -1,0 +1,9 @@
+{
+    "name": "Node container",
+    "dockerComposeFile": ["../docker-compose.yml"],
+    "service": "Node",
+    "shutdownAction": "none",
+    "extensions": ["golang.go"],
+    // Open the sub-folder with the source code
+    "workspaceFolder": "/workspace/Node"
+  }

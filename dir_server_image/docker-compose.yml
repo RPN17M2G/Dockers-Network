@@ -1,0 +1,18 @@
+version: '3.4'
+
+networks:
+  DockersNetwork:
+    external: true
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+services:
+  dirserverimage:
+    image: dirserverimage
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      DockersNetwork:
+        ipv4_address: 172.20.0.2

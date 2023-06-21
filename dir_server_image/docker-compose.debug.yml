@@ -1,0 +1,24 @@
+version: '3.4'
+
+networks:
+  DockersNetwork:
+    external: true
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+services:
+  dirserverimage:
+    image: dirserverimage
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./dirserver:/code/dirserver
+    command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5679 -m uvicorn dirserver.main:app --host 0.0.0.0 --port 8001 --reload"]
+    networks:
+      DockersNetwork:
+        ipv4_address: 172.20.0.2
+    ports:
+    - 8001:8001
+    - 5679:5679
